@@ -2,7 +2,7 @@
 <module>
    <name>privela</name>
    <displayName><![CDATA[Privela]]></displayName>
-   <version><![CDATA[2.0.5]]></version>
+   <version><![CDATA[2.0.6]]></version>
    <description><![CDATA[Prestashop integration with RBox24 Shopping Cart Recovery. Get 5 carts recovered free of charge each month.]]></description>
    <author><![CDATA[RBox24]]></author>
    <tab><![CDATA[advertising_marketing]]></tab>

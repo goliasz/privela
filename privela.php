@@ -33,7 +33,7 @@ class Privela extends Module
         $this->module_key = '1d0f87f5da56b0d9d6417743f41f007a';
         $this->name = 'privela';
         $this->tab = 'advertising_marketing';
-        $this->version = '2.0.5';
+        $this->version = '2.0.6';
         $this->author = 'RBox24';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6');
