@@ -33,7 +33,7 @@ class Privela extends Module
         $this->module_key = '1d0f87f5da56b0d9d6417743f41f007a';
         $this->name = 'privela';
         $this->tab = 'advertising_marketing';
-        $this->version = '2.0.4';
+        $this->version = '2.0.5';
         $this->author = 'RBox24';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6');
@@ -107,9 +107,12 @@ class Privela extends Module
 
     private function createContent()
     {
+        $secret = Tools::substr(md5(rand()), 0, 7);
+
         if (!Configuration::updateValue('PRI_API', '') ||
             !Configuration::updateValue('PRI_EMAIL', '') ||
-            !Configuration::updateValue('PRI_SENDER_EMAIL', '')) {
+            !Configuration::updateValue('PRI_SENDER_EMAIL', '') ||
+            !Configuration::updateValue('PRI_SECRET_TEXT', $secret)) {
             return false;
         }
 
@@ -120,7 +123,8 @@ class Privela extends Module
     {
         if (!Configuration::deleteByName('PRI_API') ||
             !Configuration::deleteByName('PRI_EMAIL') ||
-            !Configuration::deleteByName('PRI_SENDER_EMAIL')) {
+            !Configuration::deleteByName('PRI_SENDER_EMAIL') ||
+            !Configuration::deleteByName('PRI_SECRET_TEXT')) {
             return false;
         }
 
@@ -158,7 +162,8 @@ class Privela extends Module
 
         if (Configuration::updateValue('PRI_API', Tools::getValue('PRI_API')) &&
             Configuration::updateValue('PRI_EMAIL', Tools::getValue('PRI_EMAIL')) &&
-            Configuration::updateValue('PRI_SENDER_EMAIL', Tools::getValue('PRI_SENDER_EMAIL'))) {
+            Configuration::updateValue('PRI_SENDER_EMAIL', Tools::getValue('PRI_SENDER_EMAIL')) &&
+            Configuration::updateValue('PRI_SECRET_TEXT', Tools::getValue('PRI_SECRET_TEXT'))) {
 
             $message = 'Configuration saved';
             $classlist = 'module_confirmation conf confirm alert alert-success';
@@ -221,6 +226,7 @@ class Privela extends Module
             'PRI_API' => Configuration::get('PRI_API'),
             'PRI_EMAIL' => Configuration::get('PRI_EMAIL'),
             'PRI_SENDER_EMAIL' => Configuration::get('PRI_SENDER_EMAIL'),
+            'PRI_SECRET_TEXT' => Configuration::get('PRI_SECRET_TEXT'),
         ));
     }
 
@@ -371,6 +377,7 @@ class Privela extends Module
         $owner = Configuration::get('PRI_EMAIL');
         $apiSecret = Configuration::get('PRI_API');
         $senderEmail = Configuration::get('PRI_SENDER_EMAIL');
+        $secret = Configuration::get('PRI_SECRET_TEXT');
 
         $phone = '';
         $landline = '';
@@ -386,6 +393,7 @@ class Privela extends Module
           'hook' => 'hookActionCustomerAccountAdd',
           'uptime' => $uptime,
 
+          'secret' => $secret,
           'sender_email' => $senderEmail,
           'version' => $this->version,
           'promo_config' => $apiSecret,
@@ -441,6 +449,7 @@ class Privela extends Module
         $owner = Configuration::get('PRI_EMAIL');
         $apiSecret = Configuration::get('PRI_API');
         $senderEmail = Configuration::get('PRI_SENDER_EMAIL');
+        $secret = Configuration::get('PRI_SECRET_TEXT');
 
         $shop_name = $this->context->shop->name;
 
@@ -456,6 +465,7 @@ class Privela extends Module
             'action' => 'AUTHENTICATE',
             'uptime' => $uptime,
 
+            'secret' => $secret,
             'sender_email' => $senderEmail,
             'version' => $this->version,
             'shop_owner' => $owner,
@@ -519,6 +529,7 @@ class Privela extends Module
         $owner = Configuration::get('PRI_EMAIL');
         $apiSecret = Configuration::get('PRI_API');
         $senderEmail = Configuration::get('PRI_SENDER_EMAIL');
+        $secret = Configuration::get('PRI_SECRET_TEXT');
 
         $promocode = $this->getPromoCodeActive($apiSecret);
 
@@ -534,6 +545,7 @@ class Privela extends Module
             'action' => 'PURCHASE',
             'uptime' => $uptime,
 
+            'secret' => $secret,
             'sender_email' => $senderEmail,
             'version' => $this->version,
             'millis' => round(time() * 1000),
@@ -625,6 +637,7 @@ class Privela extends Module
                 $owner = Configuration::get('PRI_EMAIL');
                 $apiSecret = Configuration::get('PRI_API');
                 $senderEmail = Configuration::get('PRI_SENDER_EMAIL');
+                $secret = Configuration::get('PRI_SECRET_TEXT');
 
                 $promocode = $this->getPromoCodeActive($apiSecret);
 
@@ -645,6 +658,7 @@ class Privela extends Module
                     'promo' => $promocode,
                     'promo_config' => $apiSecret,
 
+                    'secret' => $secret,
                     'sender_email' => $senderEmail,
                     'version' => $this->version,
                     'shop_owner' => $owner,

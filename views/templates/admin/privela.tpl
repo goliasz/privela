@@ -45,6 +45,13 @@
     Used to send recovery messages to customers who abandoned their carts. It is important that from email exists. Just after successful setup we will send a confirmation link to this email address. After successful confirmation sending messages will be activated and we will start monitoring process performance.  
     </p>
     <p>
+      <label for="PRI_SECRET_TEXT">{l s='Secret text:' mod='privela'}</label>
+      <input id="PRI_SECRET_TEXT" name="PRI_SECRET_TEXT" type="text" value="{$PRI_SECRET_TEXT|escape:'htmlall':'UTF-8'}" />
+    </p>
+    <p>
+    We have generated a random text for you but you can enter here anything you wish. We will use it to verify if data is coming from valid and trusted source.
+    </p>
+    <p>
       <label>&nbsp;</label>
       <input id="submit_{$module_name|escape:'htmlall':'UTF-8'}" name="submit_{$module_name|escape:'htmlall':'UTF-8'}" type="submit" value="{l s='Save' mod='privela'}" class="button" />
     </p>
