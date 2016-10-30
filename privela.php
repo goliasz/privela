@@ -397,7 +397,7 @@ class Privela extends Module
           'uptime' => $uptime,
 
           'secret' => $secret,
-          'partner' => $partner, 
+          'partner' => $partner,
           'sender_email' => $senderEmail,
           'version' => $this->version,
           'promo_config' => $apiSecret,
@@ -471,7 +471,7 @@ class Privela extends Module
             'uptime' => $uptime,
 
             'secret' => $secret,
-            'partner' => $partner, 
+            'partner' => $partner,
             'sender_email' => $senderEmail,
             'version' => $this->version,
             'shop_owner' => $owner,
@@ -553,7 +553,7 @@ class Privela extends Module
             'uptime' => $uptime,
 
             'secret' => $secret,
-            'partner' => $partner, 
+            'partner' => $partner,
             'sender_email' => $senderEmail,
             'version' => $this->version,
             'millis' => round(time() * 1000),
@@ -668,7 +668,7 @@ class Privela extends Module
                     'promo_config' => $apiSecret,
 
                     'secret' => $secret,
-                    'partner' => $partner, 
+                    'partner' => $partner,
                     'sender_email' => $senderEmail,
                     'version' => $this->version,
                     'shop_owner' => $owner,
