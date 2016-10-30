@@ -38,11 +38,11 @@
 <BR>Once code gets invalid an email notification is sent to the administrator and sending recovery emails is suspended until existing or new code becomes valid again.
     </p>
     <p>
-      <label for="PRI_SENDER_EMAIL">{l s='Reply-To E-mail (required):' mod='privela'}</label>
+      <label for="PRI_SENDER_EMAIL">{l s='From E-mail (required):' mod='privela'}</label>
       <input id="PRI_SENDER_EMAIL" name="PRI_SENDER_EMAIL" type="text" value="{$PRI_SENDER_EMAIL|escape:'htmlall':'UTF-8'}" />
     </p>
     <p>
-    Used as reply-to e-mail address in recovery messages.  
+    Used to send recovery messages to customers who abandoned their carts. It is important that from email exists. Just after successful setup we will send a confirmation request to this email address. After successful confirmation sending messages will be activated and we will start monitoring process performance.
     </p>
     <p>
       <label for="PRI_SECRET_TEXT">{l s='Secret text:' mod='privela'}</label>
