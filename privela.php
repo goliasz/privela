@@ -36,7 +36,7 @@ class Privela extends Module
         $this->version = '2.0.7';
         $this->author = 'RBox24';
         $this->need_instance = 0;
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.6');
+        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.7');
 
         $this->bootstrap = true;
 
