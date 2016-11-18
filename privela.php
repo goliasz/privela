@@ -188,9 +188,15 @@ class Privela extends Module
             }
 
             $promo = $this->getPromoCodeActive(Configuration::get('PRI_API'));
-            if (!$promo[0]['id']) {
-                // invalid voucher
-                $message = 'Cart Rule Code (voucher) is not valid.';
+            if (!empty($promo)) {
+              if (!$promo[0]['id']) {
+                  // invalid voucher
+                  $message = 'Cart Rule Code (voucher) is not valid.';
+                  $classlist = 'module_error alert alert-danger';
+              }
+            }
+            else {
+                $message = 'Valid Cart Rule Code (voucher) is required.';
                 $classlist = 'module_error alert alert-danger';
             }
         } else {
@@ -605,7 +611,7 @@ class Privela extends Module
             $email = $guestemail;
         }
 
-        if ($context->cart->id) {
+        if ($context->cart && $context->cart->id) {
             if (($params['cart']->nbProducts()) > 0) {
                 $products = $params['cart']->getProducts();
                 $prices = $params['cart']->getOrderTotal(true);
