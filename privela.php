@@ -153,7 +153,10 @@ class Privela extends Module
 
         $this->displayContent($message, $classlist);
 
-        return $this->display(__FILE__, 'views/templates/admin/privela.tpl');
+        $html = $this->display(__FILE__, 'views/templates/admin/privela.tpl');
+
+        //return $this->display(__FILE__, 'views/templates/admin/privela.tpl');
+        return $html.$this->display(__FILE__, 'views/templates/admin/prestui-0.6.0/ps-tags.tpl');
     }
 
     private function saveContent()
