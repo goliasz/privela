@@ -152,8 +152,8 @@ class Privela extends Module
 
         if (Tools::isSubmit('submit_'.$this->name)) {
             $arr = $this->saveContent();
-            $message = $arr[0];
-            $classlist = $arr[1];
+            $message = $arr["message"];
+            $classlist = $arr["code"];
         }
 
         if (Tools::isSubmit('export_'.$this->name)) {
@@ -181,22 +181,26 @@ class Privela extends Module
 
             $message = 'Configuration saved';
             $classlist = 'alert-success';
+            $field = 'none';
 
             if (!$this->checkApiData()) {
                 $message = 'Fill out all configuration fields please. Two valid and existing email addresses and valid voucher code (Cart Rule Code) are necessary.';
-                $classlist = 'alert-error';
+                $classlist = 'alert-danger';
+                $field = 'PRI_API';
             }
 
             if (!filter_var(Configuration::get('PRI_EMAIL'), FILTER_VALIDATE_EMAIL)) {
                 // invalid emailaddress
                 $message = "Administrator's email is invalid.";
-                $classlist = 'alert-error';
+                $classlist = 'alert-danger';
+                $field = 'PRI_EMAIL';
             }
 
             if (!filter_var(Configuration::get('PRI_SENDER_EMAIL'), FILTER_VALIDATE_EMAIL)) {
                 // invalid emailaddress
                 $message = 'From email is invalid.';
-                $classlist = 'alert-error';
+                $classlist = 'alert-danger';
+                $field = 'PRI_SENDER_EMAIL';
             }
 
             $promo = $this->getPromoCodeActive(Configuration::get('PRI_API'));
@@ -204,20 +208,20 @@ class Privela extends Module
               if (!$promo[0]['id']) {
                   // invalid voucher
                   $message = 'Cart Rule Code (voucher) is not valid.';
-                  $classlist = 'alert-error';
+                  $classlist = 'alert-danger';
+                  $field = 'PRI_API';
               }
             }
             else {
                 $message = 'Valid Cart Rule Code (voucher) is required.';
-                $classlist = 'alert-error';
+                $classlist = 'alert-danger';
             }
         } else {
             $message = 'Error';
-            $classlist = 'alert-error';
+            $classlist = 'alert-danger';
         }
 
-        $arr[] = $message;
-        $arr[] = $classlist;
+        $arr[] = array("message" => $message, "code" => $classlist, "field" => $field);
 
         return $arr;
     }

@@ -21,7 +21,12 @@
 
 <script>
 function handleError(error) {
-  alert(error);
+  //alert(error);
+  var jerror = JSON.parse(error);
+
+  var fa = document.getElementById('form_alert_x');
+  fa.style.display = 'inherit';
+  fa.innerHTML = '<ps-alert alert-class="alert '+jerror[0].code+'"><div class="alert alert '+jerror[0].code+'"> <button type="button" class="close" data-dismiss="alert">×</button> '+jerror[0].message+' </div></ps-alert>';
 }
 
 function submitSave() {
@@ -43,24 +48,27 @@ function submitSave() {
 </script>
 
 <ps-panel icon="icon-cogs" header="Configuration">
+<br>
 
-<form method="post" id="form_{$module_name|escape:'htmlall':'UTF-8'}" class="form-horizontal">
+<form class="form-horizontal">
+  <ps-alert style="display:none" id="form_alert">"{$message|escape:'htmlall':'UTF-8'}"</ps-alert>
 
-  <ps-input-text name="PRI_EMAIL" label="Administrators E-mail" required-input="true" value="{$PRI_EMAIL|escape:'htmlall':'UTF-8'}" help="Required to get access to management console and to receive important information about module operation, performance and status. It is important email exists otherwise you won't receive management console access information." hint="Required administrator email">
+  <div id="form_alert_x"></div>
+
+  <ps-input-text name="PRI_EMAIL" placeholder="Administrator e-mail..." label="Administrators E-mail" required-input="true" value="{$PRI_EMAIL|escape:'htmlall':'UTF-8'}" help="Required to get access to management console and to receive important information about module operation, performance and status. It is important email exists otherwise you won't receive management console access information." hint="Required administrator email">
   </ps-input-text>
 
-  <ps-input-text name="PRI_API" label="Cart Rule Code" required-input="true" value="{$PRI_API|escape:'htmlall':'UTF-8'}" help="Cart Rule Code (voucher) is used to track cart recovery success rate and boost recovery. Once valid code is provided and module is enabled process of monitoring carts abandonment starts and recovery emails are being sent to customers.<BR>Just after module starts collecting traffic first welcome email is sent with management console access details.<BR>Once code gets invalid an email notification is sent to the administrator and sending recovery emails is suspended until existing or new code becomes valid again." hint="Required cart rule code">
+  <ps-input-text name="PRI_API" placeholder="Promo code..." label="Cart Rule Code" required-input="true" value="{$PRI_API|escape:'htmlall':'UTF-8'}" help="Cart Rule Code (voucher) is used to track cart recovery success rate and boost recovery. Once valid code is provided and module is enabled process of monitoring carts abandonment starts and recovery emails are being sent to customers.<BR>Just after module starts collecting traffic first welcome email is sent with management console access details.<BR>Once code gets invalid an email notification is sent to the administrator and sending recovery emails is suspended until existing or new code becomes valid again." hint="Required cart rule code">
   </ps-input-text>
 
-  <ps-input-text name="PRI_SENDER_EMAIL" label="From E-mail" required-input="true" value="{$PRI_SENDER_EMAIL|escape:'htmlall':'UTF-8'}" help="Used to send recovery messages to customers who abandoned their carts. It is important that from email exists. Just after successful setup we will send a confirmation request to this email address. After successful confirmation sending messages will be activated and we will start monitoring process performance." hint="Required sender email">
+  <ps-input-text name="PRI_SENDER_EMAIL" placeholder="From e-mail..." label="From E-mail" required-input="true" value="{$PRI_SENDER_EMAIL|escape:'htmlall':'UTF-8'}" help="Used to send recovery messages to customers who abandoned their carts. It is important that from email exists. Just after successful setup we will send a confirmation request to this email address. After successful confirmation sending messages will be activated and we will start monitoring process performance." hint="Required sender email">
   </ps-input-text>
 
   <ps-input-text name="PRI_SECRET_TEXT" label="Secret Text" required-input="true" value="{$PRI_SECRET_TEXT|escape:'htmlall':'UTF-8'}" help="We have generated a random text for you but you can enter here anything you wish. We will use it to verify if data is coming from valid and trusted source." hint="Secret text">
   </ps-input-text>
-
 </form>
 
-<ps-panel-footer-submit onClick="submitSave()" label="Save" name="submit_{$module_name|escape:'htmlall':'UTF-8'}" title="Save"><ps-panel-footer-submit>
+<ps-panel-footer-submit onClick="submitSave();" label="Save" name="submit_{$module_name|escape:'htmlall':'UTF-8'}" title="Save"><ps-panel-footer-submit>
 
 </ps-panel>
 
