@@ -30,13 +30,13 @@ class Privela extends Module
 
     public function __construct()
     {
-        $this->module_key = '1d0f87f5da56b0d9d6417743f41f007a';
+        $this->module_key = '45da36f5f2d58d62a51e4a0e1e70f869';
         $this->name = 'privela';
         $this->tab = 'advertising_marketing';
         $this->version = '2.0.9';
         $this->author = 'RBox24';
         $this->need_instance = 0;
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => '1.7');
+        $this->ps_versions_compliancy = array('min' => '1.6.1', 'max' => '1.7');
 
         $this->bootstrap = true;
 
