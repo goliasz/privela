@@ -17,7 +17,7 @@
 *  Registered Trademark & Property of KOLIBERO
 *}
 
-<script src="/modules/privela/js/riot+compiler.js"></script>
+<script src="/modules/privela/js/riot+compiler.min.js"></script>
 
 <script>
 function handleError(error) {
@@ -48,7 +48,6 @@ function submitSave() {
 </script>
 
 <ps-panel icon="icon-cogs" header="Configuration">
-<br>
 
 <form class="form-horizontal">
   <ps-alert style="display:none" id="form_alert">"{$message|escape:'htmlall':'UTF-8'}"</ps-alert>
