@@ -205,14 +205,13 @@ class Privela extends Module
 
             $promo = $this->getPromoCodeActive(Configuration::get('PRI_API'));
             if (!empty($promo)) {
-              if (!$promo[0]['id']) {
-                  // invalid voucher
-                  $message = 'Cart Rule Code (voucher) is not valid.';
-                  $classlist = 'alert-danger';
-                  $field = 'PRI_API';
-              }
-            }
-            else {
+                if (!$promo[0]['id']) {
+                    // invalid voucher
+                    $message = 'Cart Rule Code (voucher) is not valid.';
+                    $classlist = 'alert-danger';
+                    $field = 'PRI_API';
+                }
+            } else {
                 $message = 'Valid Cart Rule Code (voucher) is required.';
                 $classlist = 'alert-danger';
             }

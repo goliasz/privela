@@ -17,7 +17,7 @@
 *  Registered Trademark & Property of KOLIBERO
 *}
 
-<script src="/modules/privela/js/riot+compiler.min.js"></script>
+<script src="/modules/privela/views/js/riot+compiler.js"></script>
 
 <script>
 function handleError(error) {
