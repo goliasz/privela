@@ -133,6 +133,15 @@ class Privela extends Module
         return true;
     }
 
+
+    public function ajaxProcessSaveContent()
+    {
+        $arr = $this->saveContent();
+
+        // Response
+        die(Tools::jsonEncode($arr));
+    }
+
     /**
      * admin page.
      */
@@ -156,7 +165,7 @@ class Privela extends Module
         $html = $this->display(__FILE__, 'views/templates/admin/privela.tpl');
 
         //return $this->display(__FILE__, 'views/templates/admin/privela.tpl');
-        return $html.$this->display(__FILE__, 'views/templates/admin/prestui-0.6.0/ps-tags.tpl');
+        return $html.$this->display(__FILE__, 'views/templates/admin/prestui/ps-tags.tpl');
     }
 
     private function saveContent()
@@ -171,23 +180,23 @@ class Privela extends Module
             Configuration::updateValue('PRI_SECRET_TEXT', Tools::getValue('PRI_SECRET_TEXT'))) {
 
             $message = 'Configuration saved';
-            $classlist = 'module_confirmation conf confirm alert alert-success';
+            $classlist = 'alert-success';
 
             if (!$this->checkApiData()) {
                 $message = 'Fill out all configuration fields please. Two valid and existing email addresses and valid voucher code (Cart Rule Code) are necessary.';
-                $classlist = 'module_error alert alert-danger';
+                $classlist = 'alert-error';
             }
 
             if (!filter_var(Configuration::get('PRI_EMAIL'), FILTER_VALIDATE_EMAIL)) {
                 // invalid emailaddress
                 $message = "Administrator's email is invalid.";
-                $classlist = 'module_error alert alert-danger';
+                $classlist = 'alert-error';
             }
 
             if (!filter_var(Configuration::get('PRI_SENDER_EMAIL'), FILTER_VALIDATE_EMAIL)) {
                 // invalid emailaddress
                 $message = 'From email is invalid.';
-                $classlist = 'module_error alert alert-danger';
+                $classlist = 'alert-error';
             }
 
             $promo = $this->getPromoCodeActive(Configuration::get('PRI_API'));
@@ -195,16 +204,16 @@ class Privela extends Module
               if (!$promo[0]['id']) {
                   // invalid voucher
                   $message = 'Cart Rule Code (voucher) is not valid.';
-                  $classlist = 'module_error alert alert-danger';
+                  $classlist = 'alert-error';
               }
             }
             else {
                 $message = 'Valid Cart Rule Code (voucher) is required.';
-                $classlist = 'module_error alert alert-danger';
+                $classlist = 'alert-error';
             }
         } else {
             $message = 'Error';
-            $classlist = 'module_error alert alert-danger';
+            $classlist = 'alert-error';
         }
 
         $arr[] = $message;
