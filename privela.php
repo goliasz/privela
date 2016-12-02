@@ -33,7 +33,7 @@ class Privela extends Module
         $this->module_key = '45da36f5f2d58d62a51e4a0e1e70f869';
         $this->name = 'privela';
         $this->tab = 'advertising_marketing';
-        $this->version = '2.0.9';
+        $this->version = '2.0.10';
         $this->author = 'RBox24';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.6.1', 'max' => '1.7');
@@ -406,6 +406,9 @@ class Privela extends Module
         $phone = '';
         $landline = '';
         $address = '';
+        $zip_code = '';
+        $city = '';
+        $country = '';
 
         $shop_physical_uri = $this->context->shop->physical_uri;
         $shop_virtual_uri = $this->context->shop->virtual_uri;
@@ -437,9 +440,9 @@ class Privela extends Module
             'phone' => $phone,
             'address' => array(
               'streetAddress' => $address,
-              'zipCode' => $params ['_POST']['postcode'],
-              'city' => $params ['_POST']['city'],
-              'country' => Country::getIsoById($params ['_POST']['id_country']),
+              'zipCode' => $zip_code,
+              'city' => $city,
+              'country' => $country,
             ),
 
             'birthday' => $birthday,
